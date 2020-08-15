@@ -6,10 +6,12 @@ class SessionsController < ApplicationController
         end
 
         post '/signup' do
-            @user = User.new(username: params["name"], password: params["password"])
-             @user.save
-                session[:user_id] = @user.id
-           redirect '/users/user_home'
+            user = User.new(:username => params[:username], :password => params[:password])
+           if user.save
+                redirect "/login"
+           else
+            erb :"/session/error"
+           end 
             
     end 
 
@@ -18,12 +20,12 @@ class SessionsController < ApplicationController
         end
 
         post '/login' do
-            @user = User.find_by(username: params[:username], password: params[:password])
-            if @user 
-                session[user_id] = @user.id 
+            user = User.find_by(:username => params[:username])
+            if user && user.authenticate(params[:password])
+                session[:user_id] = user.id 
                 redirect '/users/user_home'
             else 
-                erb :"/session/error"
+                erb :'/session/error'
         end
     end
 
