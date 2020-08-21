@@ -19,7 +19,7 @@ class ApplicationController < Sinatra::Base
   end
 
   not_found do
-    "Your page cannot be found"
+    "This page cannot be found!"
   end
 
   helpers do
