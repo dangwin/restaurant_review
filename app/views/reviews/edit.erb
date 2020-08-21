@@ -1,0 +1,6 @@
+<h1>Please make your changes!</h1>
+<form action="/reviews/<%= @review.id %>" method='post'>
+    <input type="hidden" name="_method" value="patch">
+    <input type="text" name="text" value="<%= @review.text %>">
+    <input type="submit">
+</form>

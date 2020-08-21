@@ -1,0 +1,20 @@
+<center><h1>Hello <%= current_user.username %> </h1>
+
+<h3>Here are your reviews</h3>
+
+<% @reviews.each do |review| %>
+        <p><em><%= review.text %></em> - <%= review.restaurant.name %></p>
+             <% if review.user == current_user %>
+              <p><a href="/reviews/<%= review.id %>/edit">Edit</a></p>
+            <form action="/reviews/<%= review.id %>" method='post'>
+                <input type="hidden" name="_method" value="delete">
+                <input type="submit" value="Delete">
+                <hr>
+            </form>
+        <% end %>
+
+ <% end %>
+       <p><a href="/reviews/new"> Add another review</a></p>
+       <br>
+       <p><a href="/logout"> Logout</a></p>
+
